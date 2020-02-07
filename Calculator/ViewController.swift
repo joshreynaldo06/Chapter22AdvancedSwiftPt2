@@ -22,6 +22,16 @@ class ViewController: UIViewController {
         guard let number = Double(displayLabel.text!) else {
             fatalError("Cannot convert display label text into a Double")
         }
+        
+        if let calcMethod = sender.currentTitle{
+            if calcMethod == "+/-"{
+                displayLabel.text = String(number * -1)
+            } else if calcMethod == "AC"{
+                displayLabel.text = "0"
+            } else if calcMethod == "%"{
+                displayLabel.text = String(number / 100 )
+            }
+        }
     
     }
 
@@ -34,6 +44,19 @@ class ViewController: UIViewController {
                 displayLabel.text = numValue
                 isFinishedTypingNumber = false
             } else {
+                
+                if numValue == "."{
+                    guard let currentDisplayValue = Double(displayLabel.text!) else {
+                        fatalError("Cannot convert value to Double")
+                    }
+                    
+                    let isInt = floor(currentDisplayValue) == currentDisplayValue
+                    
+                    if !isInt {
+                        return
+                    }
+                }
+                
                 displayLabel.text = displayLabel.text! + numValue
             }
         }
