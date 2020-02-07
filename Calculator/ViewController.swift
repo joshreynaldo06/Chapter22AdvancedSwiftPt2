@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     @IBAction func calcButtonPressed(_ sender: UIButton) {
  
         isFinishedTypingNumber = true
+        guard let number = Double(displayLabel.text!) else {
+            fatalError("Cannot convert display label text into a Double")
+        }
     
     }
 
